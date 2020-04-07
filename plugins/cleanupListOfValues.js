@@ -47,36 +47,43 @@ var regNumericValues = /^([\-+]?\d*\.?\d+([eE][\-+]?\d+)?)(px|pt|pc|mm|cm|m|in|f
 exports.fn = function(item, params) {
 
 
-    if ( item.hasAttr('points') ) {
-        roundValues(item.attrs.points);
-    }
-
-    if ( item.hasAttr('enable-background') ) {
-        roundValues(item.attrs['enable-background']);
-    }
+    // if ( item.hasAttr('points') ) {
+    //     roundValues(item.attrs.points);
+    // }
+    //
+    // if ( item.hasAttr('enable-background') ) {
+    //     roundValues(item.attrs['enable-background']);
+    // }
 
     if ( item.hasAttr('viewBox') ) {
         roundValues(item.attrs.viewBox);
     }
 
-    if ( item.hasAttr('stroke-dasharray') ) {
-        roundValues(item.attrs['stroke-dasharray']);
-    }
+    // if ( item.hasAttr('stroke-dasharray') ) {
+    //     roundValues(item.attrs['stroke-dasharray']);
+    // }
+    //
+    // if ( item.hasAttr('dx') ) {
+    //     roundValues(item.attrs.dx);
+    // }
+    //
+    // if ( item.hasAttr('dy') ) {
+    //     roundValues(item.attrs.dy);
+    // }
+    //
+    // if ( item.hasAttr('x') ) {
+    //     roundValues(item.attrs.x);
+    // }
+    //
+    // if ( item.hasAttr('y') ) {
+    //     roundValues(item.attrs.y);
+    // }
 
-    if ( item.hasAttr('dx') ) {
-        roundValues(item.attrs.dx);
+    if ( item.hasAttr('height') ) {
+        roundValues(item.attrs.height);
     }
-
-    if ( item.hasAttr('dy') ) {
-        roundValues(item.attrs.dy);
-    }
-
-    if ( item.hasAttr('x') ) {
-        roundValues(item.attrs.x);
-    }
-
-    if ( item.hasAttr('y') ) {
-        roundValues(item.attrs.y);
+    if ( item.hasAttr('width') ) {
+        roundValues(item.attrs.width);
     }
 
 
@@ -98,12 +105,12 @@ exports.fn = function(item, params) {
              // if attribute value matches regNumericValues
             if (match) {
                 // round it to the fixed precision
-                num = +(+match[1]).toFixed(params.floatPrecision),
+                num = +Math.ceil((+match[1]).toFixed(params.floatPrecision)),
                 units = match[3] || '';
 
                 // convert absolute values to pixels
                 if (params.convertToPx && units && (units in absoluteLengths)) {
-                    var pxNum = +(absoluteLengths[units] * match[1]).toFixed(params.floatPrecision);
+                    var pxNum = +Math.ceil((absoluteLengths[units] * match[1]).toFixed(params.floatPrecision));
 
                     if (String(pxNum).length < match[0].length)
                         num = pxNum,
