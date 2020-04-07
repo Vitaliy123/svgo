@@ -105,12 +105,12 @@ exports.fn = function(item, params) {
              // if attribute value matches regNumericValues
             if (match) {
                 // round it to the fixed precision
-                num = +Math.ceil((+match[1]).toFixed(params.floatPrecision)),
+                num = +Math.ceil((+match[1])),
                 units = match[3] || '';
 
                 // convert absolute values to pixels
                 if (params.convertToPx && units && (units in absoluteLengths)) {
-                    var pxNum = +Math.ceil((absoluteLengths[units] * match[1]).toFixed(params.floatPrecision));
+                    var pxNum = +Math.ceil((absoluteLengths[units] * match[1]));
 
                     if (String(pxNum).length < match[0].length)
                         num = pxNum,
